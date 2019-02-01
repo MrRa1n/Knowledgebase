@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        title Knowledgebase
+        link(rel='stylesheet' href='/bootstrap/dist/css/bootstrap.min.css')
+    body
+        nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+            a.navbar-brand(href='/') Knowledgebase
+            button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarsExampleDefault' aria-controls='navbarsExampleDefault' aria-expanded='false' aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            
+            #navbarsExampleDefault.collapse.navbar-collapse
+                ul.navbar-nav.mr-auto
+                    li.nav-item.active
+                        a.nav-link(href='/') Home 
+                    li.nav-item
+                        a.nav-link(href='/articles/add') Add Article
+
+        .container
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy; 2019
+
+        script(src='/jquery/dist/jquery.js')
+        script(src='/bootstrap/dist/js/bootstrap.min.js')
+        

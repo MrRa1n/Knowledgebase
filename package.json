@@ -1,0 +1,19 @@
+{
+  "name": "nodekb",
+  "version": "1.0.0",
+  "description": "Simple knowledgebase app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Toby Cook",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.2.1",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.4.8",
+    "pug": "^2.0.3"
+  }
+}
