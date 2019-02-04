@@ -2,6 +2,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 mongoose.connect('mongodb://localhost/nodekb', { useNewUrlParser: true });
 let db = mongoose.connection;
@@ -33,6 +36,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Load view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// Express-session Middleware
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function(req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+
+// Express validator middleware
+app.use(expressValidator());
 
 // Home route
 app.get('/', function(req, res) {
@@ -68,6 +88,7 @@ app.post('/articles/add', function(req, res) {
             console.log(err);
             return;
         } else {
+            req.flash('success', 'Article added');
             res.redirect('/');
         }
     });
@@ -82,7 +103,7 @@ app.get('/articles/:id', function(req, res) {
     });
 });
 
-// Add submit POST route
+// Update submit POST route
 app.post('/articles/edit/:id', function(req, res) {
     let article = {};
     article.title = req.body.title;
@@ -96,6 +117,7 @@ app.post('/articles/edit/:id', function(req, res) {
             console.log(err);
             return;
         } else {
+            req.flash('success', 'Article updated');
             res.redirect('/');
         }
     });
